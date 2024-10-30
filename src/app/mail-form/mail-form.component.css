@@ -1,11 +1,7 @@
-/* Stili generali */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-}
+
 
 .sidebar {
-  width: 300px;
+  width: 28%;
   position: fixed;
   right: 0;
   top: 20%;
@@ -13,6 +9,7 @@ body {
   background-color: #f8f8f8;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  overflow: auto;
 }
 
 .form-container div {
@@ -29,9 +26,29 @@ input[type="text"], input[type="date"], input[type="tel"], input[type="email"], 
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-input[type="text"]:focus, input[type="date"]:focus, input[type="tel"]:focus, input[type="email"]:focus, input[type="file"]:focus {
+input[type="text"]:focus, input[type="date"]:focus, input[type="tel"]:focus, input[type="email"]:focus, input[type="file"]:focus, textarea:focus {
   border-color: #FFA500; /* Arancione */
   box-shadow: 0 0 8px rgba(255, 165, 0, 0.5); /* Ombra arancione */
+}
+
+/* Stili per il select */
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease,
+  box-shadow 0.3s ease;
+}
+
+select:focus {
+  border-color: #FFA500; /* Arancione */
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.5); /* Ombra arancione */
+}
+
+textarea {
+  height: 10%;
 }
 
 /* Card */
@@ -48,6 +65,7 @@ input[type="text"]:focus, input[type="date"]:focus, input[type="tel"]:focus, inp
   padding: 20px;
   /* overflow: hidden; */
   display: none;
+  border-radius: 15px;
 }
 
 .card-expanded {

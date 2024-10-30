@@ -24,3 +24,10 @@ a::after {
 a:hover::after {
   width: 100%;
 }
+
+.active-link {
+  color: #FFA500; /* Arancione */
+  font-weight: bold;
+  border-bottom: 2px solid #FFA500;
+}
+

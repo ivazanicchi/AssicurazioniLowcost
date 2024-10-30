@@ -1,5 +1,5 @@
  <div class="sidebar">
-  <h3 class="mt-0">Richiedi Preventivo</h3>
+  <h3 class="text-center mt-0">Richiedi un Preventivo</h3>
   <p *ngIf="showInputRequired" style="color: red;"><strong>Compila i campi richiesti</strong></p>
   <form [formGroup]="form" class="form-container">
     <div>
@@ -12,8 +12,8 @@
         [ngClass]="{'is-invalid': form.controls['name'].invalid && form.controls['name'].touched}"
       >
     </div>
-    <div>
-      <label for="targa">Targa del veicolo *</label>
+    <div class="mb-0">
+      <label for="targa">Targa del veicolo <span *ngIf="form.controls['flagFormatoTargaNonItaliano'].value == false">*</span></label>
       <input
         placeholder="Inserisci la targa"
         id="targa"
@@ -21,6 +21,34 @@
         formControlName="targa"
         [ngClass]="{'is-invalid': form.controls['targa'].invalid && form.controls['targa'].touched}"
       >
+    </div>
+    <div class="mb-5">
+      <label for="flagFormatoTargaNonItaliano">Targa Storica </label>
+      <input
+        id="flagFormatoTargaNonItaliano"
+        type="checkbox"
+        formControlName="flagFormatoTargaNonItaliano"
+        (change)="onFlagChange()"
+        class="mr-2"
+      >
+      <div class="tooltip" style="margin: 0;">
+        <img src="../../assets/icons-info.png" alt="">
+        <span class="tooltiptext">Se il veicolo è un auto storica o ha una targa diversa da quelle di default
+          allora abilita il campo e dacci tutti i dettagli nel campo <strong>Note</strong>
+        </span>
+      </div>
+    </div>
+    <div>
+      <label for="tipoVeicolo">Seleziona il tipo di veicolo <span *ngIf="form.controls['flagFormatoTargaNonItaliano'].value == false">*</span></label>
+      <select
+      id="tipoVeicolo"
+      type=""
+      formControlName="tipoVeicolo"
+      [ngClass]="{'is-invalid': form.controls['tipoVeicolo'].invalid && form.controls['tipoVeicolo'].touched}"
+      >
+        <option value="" disabled>Seleziona un opzione</option>
+        <option *ngFor="let option of listaVeicoli" value="option.value">{{ option.label }}</option>
+    </select>
     </div>
     <div>
       <label for="dataDiNascita">Data di nascita *</label>
@@ -39,6 +67,7 @@
         type="tel"
         formControlName="telefono"
         [ngClass]="{'is-invalid': form.controls['telefono'].invalid && form.controls['telefono'].touched}"
+        (input)="validateNumberInput($event)"
       >
     </div>
     <div>
@@ -51,7 +80,7 @@
       >
     </div>
     <div>
-      <label for="text">Note * : </label>
+      <label for="text">Note * </label>
       <div class="tooltip" style="margin: 0;">
         <img src="../../assets/icons-info.png" alt="">
         <span class="tooltiptext">Qui puoi scrivere tutte le informazioni utili per il tuo preventivo: <strong>Prima assicurazione</strong> o <strong>Rinnovo</strong>,
@@ -86,6 +115,7 @@
 <div class="card" [ngClass]="{'card-expanded': isExpanded}">
   <button class="close-btn" (click)="expandForm()">X</button>
   <h3>Richiedi Preventivo</h3>
+  <p *ngIf="showInputRequired" style="color: red;"><strong>Compila i campi richiesti</strong></p>
   <form [formGroup]="form" class="form-container">
     <div>
       <label for="name">Nome/Cognome *</label>
@@ -98,7 +128,7 @@
       >
     </div>
     <div>
-      <label for="targa">Targa del veicolo *</label>
+      <label for="targa">Targa del veicolo <span *ngIf="form.controls['flagFormatoTargaNonItaliano'].value == false">*</span></label>
       <input
       placeholder="Inserisci la targa"
       id="targa"
@@ -106,6 +136,34 @@
       formControlName="targa"
       [ngClass]="{'is-invalid': form.controls['targa'].invalid && form.controls['targa'].touched}"
       >
+    </div>
+    <div class="mb-5">
+      <label for="flagFormatoTargaNonItaliano">Targa Storica </label>
+      <input
+        id="flagFormatoTargaNonItaliano"
+        type="checkbox"
+        formControlName="flagFormatoTargaNonItaliano"
+        (change)="onFlagChange()"
+        class="mr-2"
+      >
+      <div class="tooltip" style="margin: 0;">
+        <img src="../../assets/icons-info.png" alt="">
+        <span class="tooltiptext">Se il veicolo è un auto storica o ha una targa diversa da quelle di default
+          allora abilita il campo e dacci tutti i dettagli nel campo <strong>Note</strong>
+        </span>
+      </div>
+    </div>
+    <div>
+      <label for="tipoVeicolo">Seleziona il tipo di veicolo <span *ngIf="form.controls['flagFormatoTargaNonItaliano'].value == false">*</span></label>
+      <select
+      id="tipoVeicolo"
+      type=""
+      formControlName="tipoVeicolo"
+      [ngClass]="{'is-invalid': form.controls['tipoVeicolo'].invalid && form.controls['tipoVeicolo'].touched}"
+      >
+        <option value="" disabled>Seleziona un opzione</option>
+        <option *ngFor="let option of listaVeicoli" value="option.value">{{ option.label }}</option>
+    </select>
     </div>
     <div>
       <label for="dataDiNascita">Data di nascita *</label>
@@ -136,7 +194,7 @@
       >
     </div>
     <div>
-      <label for="text">Note* : </label>
+      <label for="text">Note*</label>
       <div class="tooltip" style="margin: 0;">
         <img src="../../assets/icons-info.png" alt="">
         <span class="tooltiptext">Qui puoi scrivere tutte le informazioni utili per il tuo preventivo: <strong>Prima assicurazione</strong> o <strong>Rinnovo</strong>,
