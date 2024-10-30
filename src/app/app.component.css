@@ -1,0 +1,26 @@
+/* Stile iniziale del link */
+a {
+  color: #000000; /* Nero iniziale */
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Stile del link quando si passa il mouse sopra */
+a:hover {
+  color: #c25c08; /* Arancione */
+  transform: scale(1.05); /* Leggera ingrandimento */
+}
+
+/* Effetto transizione sui link */
+a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: #c25c08;
+  transition: width 0.3s ease;
+}
+
+a:hover::after {
+  width: 100%;
+}

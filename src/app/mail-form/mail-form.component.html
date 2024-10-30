@@ -1,0 +1,163 @@
+ <div class="sidebar">
+  <h3 class="mt-0">Richiedi Preventivo</h3>
+  <p *ngIf="showInputRequired" style="color: red;"><strong>Compila i campi richiesti</strong></p>
+  <form [formGroup]="form" class="form-container">
+    <div>
+      <label for="name">Nome/Cognome *</label>
+      <input
+        placeholder="Inserisci il tuo nome"
+        id="name"
+        type="text"
+        formControlName="name"
+        [ngClass]="{'is-invalid': form.controls['name'].invalid && form.controls['name'].touched}"
+      >
+    </div>
+    <div>
+      <label for="targa">Targa del veicolo *</label>
+      <input
+        placeholder="Inserisci la targa"
+        id="targa"
+        type="text"
+        formControlName="targa"
+        [ngClass]="{'is-invalid': form.controls['targa'].invalid && form.controls['targa'].touched}"
+      >
+    </div>
+    <div>
+      <label for="dataDiNascita">Data di nascita *</label>
+      <input
+        id="dataDiNascita"
+        type="date"
+        formControlName="dataDiNascita"
+        [ngClass]="{'is-invalid': form.controls['dataDiNascita'].invalid && form.controls['dataDiNascita'].touched}"
+      >
+    </div>
+    <div>
+      <label for="telefono">Numero di telefono *</label>
+      <input
+        placeholder="Inserisci il tuo numero di telefono"
+        id="telefono"
+        type="tel"
+        formControlName="telefono"
+        [ngClass]="{'is-invalid': form.controls['telefono'].invalid && form.controls['telefono'].touched}"
+      >
+    </div>
+    <div>
+      <label for="email">Mail (facoltativo)</label>
+      <input
+        placeholder="Inserisci la tua mail (facoltativo)"
+        id="email"
+        type="email"
+        formControlName="email"
+      >
+    </div>
+    <div>
+      <label for="text">Note * : </label>
+      <div class="tooltip" style="margin: 0;">
+        <img src="../../assets/icons-info.png" alt="">
+        <span class="tooltiptext">Qui puoi scrivere tutte le informazioni utili per il tuo preventivo: <strong>Prima assicurazione</strong> o <strong>Rinnovo</strong>,
+          <strong>Utilizzo della legge Bersani</strong>, <strong>Semestrale</strong>, <strong>Annuale</strong>, <strong>Guida Libera/Esperta</strong>...
+        </span>
+      </div>
+      <textarea
+        placeholder="Aggiungi eventuali note al tuo preventivo"
+        name=""
+        id="text"
+        formControlName="note"
+        [ngClass]="{'is-invalid': form.controls['note'].invalid && form.controls['note'].touched}"></textarea>
+    </div>
+
+    <div *ngIf="!fileLoaded">
+      <label for="file">File</label>
+      <input id="file" #fileInput type="file" (change)="onFileSelected($event)" style="display: none;" formControlName="file">
+      <button type="button" class="btn-file" (click)="fileInput.click()">Allega Libretto</button>
+    </div>
+    <div *ngIf="fileLoaded" class="flex gap-2 align-items-center">
+      <p>File Caricato: {{ fileName }}</p> <img (click)="removeFile()" src="../../assets/icons-cestino.png">
+    </div>
+  </form>
+
+  <div class="flex justify-content-between">
+    <button type="button" class="btn-expand" (click)="expandForm()">Ingrandisci</button>
+    <button type="submit" class="btn-submit" (click)="onSubmit()">Invia</button>
+  </div>
+</div>
+
+<!-- Card centrale -->
+<div class="card" [ngClass]="{'card-expanded': isExpanded}">
+  <button class="close-btn" (click)="expandForm()">X</button>
+  <h3>Richiedi Preventivo</h3>
+  <form [formGroup]="form" class="form-container">
+    <div>
+      <label for="name">Nome/Cognome *</label>
+      <input
+        placeholder="Inserisci il tuo nome"
+        id="name"
+        type="text"
+        formControlName="name"
+        [ngClass]="{'is-invalid': form.controls['name'].invalid && form.controls['name'].touched}"
+      >
+    </div>
+    <div>
+      <label for="targa">Targa del veicolo *</label>
+      <input
+      placeholder="Inserisci la targa"
+      id="targa"
+      type="text"
+      formControlName="targa"
+      [ngClass]="{'is-invalid': form.controls['targa'].invalid && form.controls['targa'].touched}"
+      >
+    </div>
+    <div>
+      <label for="dataDiNascita">Data di nascita *</label>
+      <input
+      id="dataDiNascita"
+      type="date"
+      formControlName="dataDiNascita"
+      [ngClass]="{'is-invalid': form.controls['dataDiNascita'].invalid && form.controls['dataDiNascita'].touched}"
+      >
+    </div>
+    <div>
+      <label for="telefono">Numero di telefono *</label>
+      <input
+      placeholder="Inserisci il tuo numero di telefono"
+      id="telefono"
+      type="tel"
+      formControlName="telefono"
+      [ngClass]="{'is-invalid': form.controls['telefono'].invalid && form.controls['telefono'].touched}"
+      >
+    </div>
+    <div>
+      <label for="email">Mail (facoltativo)</label>
+      <input
+      placeholder="Inserisci la tua mail (facoltativo)"
+      id="email"
+      type="email"
+      formControlName="email"
+      >
+    </div>
+    <div>
+      <label for="text">Note* : </label>
+      <div class="tooltip" style="margin: 0;">
+        <img src="../../assets/icons-info.png" alt="">
+        <span class="tooltiptext">Qui puoi scrivere tutte le informazioni utili per il tuo preventivo: <strong>Prima assicurazione</strong> o <strong>Rinnovo</strong>,
+          <strong>Utilizzo della legge Bersani</strong>, <strong>Semestrale</strong>, <strong>Annuale</strong>, <strong>Guida Libera/Esperta</strong>...</span>
+      </div>
+      <textarea
+      placeholder="Aggiungi eventuali note al tuo preventivo"
+      name=""
+      id="text"
+      formControlName="note"
+      [ngClass]="{'is-invalid': form.controls['note'].invalid && form.controls['note'].touched}"></textarea>
+    </div>
+    <div *ngIf="!fileLoaded">
+      <label for="file">File</label>
+      <input id="file" #fileInput type="file" (change)="onFileSelected($event)" style="display: none;" formControlName="file">
+      <button class="btn-file" type="button" (click)="fileInput.click()">Allega Libretto</button>
+    </div>
+    <div *ngIf="fileLoaded" class="flex gap-2 align-items-center">
+      <p>File Caricato: {{ fileName }}</p> <img (click)="removeFile()" src="../../assets/icons-cestino.png">
+    </div>
+  </form>
+  <button type="submit" class="btn-submit" (click)="onSubmit()">Invia</button>
+</div>
+
